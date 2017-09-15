@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <div class="container">
-      {{msg}}
-    </div>
+    
+    <main>
+      <router-view></router-view>
+    </main>
   </div>
 </template>
 
