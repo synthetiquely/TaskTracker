@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6 mr-md-auto">
       <h3>Sign up</h3>
-      <form>
+      <form @submit.prevent="submit">
         <div class="form-group">
           <label for="name">Name</label>
           <input
@@ -36,7 +36,12 @@
             v-model="password"
           >
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+        >
+          Submit
+        </button>
       </form>
     </div>
   </div>
@@ -50,6 +55,15 @@ export default {
       email: '',
       password: '',
     };
+  },
+  methods: {
+    submit() {
+      return this.$store.dispatch('signup', {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+      });
+    },
   },
 };
 </script>
