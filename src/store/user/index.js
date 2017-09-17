@@ -6,6 +6,11 @@ export default {
   state: {
     user: null,
   },
+  getters: {
+    user(state) {
+      return state.user;
+    },
+  },
   mutations: {
     setUser(state, payload) {
       state.user = payload;
@@ -13,18 +18,44 @@ export default {
   },
   actions: {
     signup({ commit }, payload) {
-      // TODO: Implement sign up request
       commit('setLoading', true);
       commit('clearError');
       api.user.signup(payload)
         .then((response) => {
           commit('setUser', response.data.user);
+          localStorage.JWT = response.data.user.token;
           commit('setLoading', false);
         })
         .catch((err) => {
           commit('setLoading', false);
           commit('setError', err.response.data.error.message);
         });
+    },
+    signin({ commit }, payload) {
+      commit('setLoading', true);
+      commit('clearError');
+      api.user.signin(payload)
+        .then((response) => {
+          commit('setUser', response.data.user);
+          localStorage.JWT = response.data.user.token;
+          commit('setLoading', false);
+        })
+        .catch((err) => {
+          commit('setLoading', false);
+          commit('setError', err.response.data.error);
+        });
+    },
+    logout({ commit }) {
+      localStorage.removeItem('JWT');
+      commit('setUser', null);
+    },
+    autoSignin({ commit }, payload) {
+      commit('setUser', {
+        name: payload.name,
+        email: payload.email,
+        confirmed: payload.confirmed,
+        token: payload.token,
+      });
     },
   },
 };

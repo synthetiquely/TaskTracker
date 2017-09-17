@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "jwt-decode": "^2.2.0",
     "semantic-ui-css": "^2.2.12",
     "validator": "^8.2.0",
     "vue": "^2.3.3",

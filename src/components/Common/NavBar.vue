@@ -5,7 +5,7 @@
         Task Tracker
       </div>
       <router-link
-      v-for="route of appRoutes"
+        v-for="route of routes"
         :to="route.path"
         :key="route.path"
         class="item teal"
@@ -13,30 +13,19 @@
       >
         {{route.name}}
       </router-link>
-      <router-link
-        v-for="route of guestRoutes"
-        :to="route.path"
-        :key="route.path"
-        class="item teal"
-        exact-active-class="active"
-      >
-        {{route.name}}
-      </router-link>
+      <a v-if="userIsAuthenticated" class="item teal" @click="logout">Logout</a>
     </div>
 </nav>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      appRoutes: [
-        {
-          name: 'Home',
-          path: '/',
-        },
-      ],
-      guestRoutes: [
+  computed: {
+    userIsAuthenticated() {
+      return this.$store.getters.user !== null && this.$store.getters.user !== undefined;
+    },
+    routes() {
+      let routes = [
         {
           name: 'Sign up',
           path: '/user/signup',
@@ -45,8 +34,26 @@ export default {
           name: 'Sign in',
           path: '/user/signin',
         },
-      ],
-    };
+      ];
+      if (this.userIsAuthenticated) {
+        routes = [
+          {
+            name: 'Home',
+            path: '/',
+          },
+          {
+            name: 'Profile',
+            path: '/profile',
+          },
+        ];
+      }
+      return routes;
+    },
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+    },
   },
 };
 </script>
