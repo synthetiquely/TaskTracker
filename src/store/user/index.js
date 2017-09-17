@@ -17,13 +17,13 @@ export default {
       commit('setLoading', true);
       commit('clearError');
       api.user.signup(payload)
-        .then((user) => {
-          commit('setUser', user);
+        .then((response) => {
+          commit('setUser', response.data.user);
           commit('setLoading', false);
         })
         .catch((err) => {
           commit('setLoading', false);
-          console.log(err);
+          commit('setError', err.response.data.error.message);
         });
     },
   },

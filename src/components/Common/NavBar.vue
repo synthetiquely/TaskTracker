@@ -1,21 +1,28 @@
 <template lang="html">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Task Tracker</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" v-for="route of appRoutes">
-        <router-link class="nav-link" :to="route.path" >{{route.name}}</router-link>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item" v-for="route of guestRoutes">
-        <router-link class="nav-link" :to="route.path" >{{route.name}}</router-link>
-      </li>
-    </ul>
-  </div>
+  <nav>
+    <div class="ui menu">
+      <div class="header item">
+        Task Tracker
+      </div>
+      <router-link
+      v-for="route of appRoutes"
+        :to="route.path"
+        :key="route.path"
+        class="item teal"
+        exact-active-class="active"
+      >
+        {{route.name}}
+      </router-link>
+      <router-link
+        v-for="route of guestRoutes"
+        :to="route.path"
+        :key="route.path"
+        class="item teal"
+        exact-active-class="active"
+      >
+        {{route.name}}
+      </router-link>
+    </div>
 </nav>
 </template>
 
@@ -45,4 +52,7 @@ export default {
 </script>
 
 <style lang="css">
+nav {
+  margin-bottom: 15px;
+}
 </style>

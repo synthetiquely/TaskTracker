@@ -40,6 +40,26 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+      },
+      {
+        test:/\.eot$/,
+        loader:'url-loader',
+      },
+      {
+        test:/\.[ot]tf$/,
+        loader:'url-loader',
+      },
+      {
+        test:/\.woff2$/,
+        loader:'url-loader',
+      },
+      {
+        test:/\.woff$/,
+        loader:'url-loader',
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
