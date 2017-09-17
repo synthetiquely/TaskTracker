@@ -5,10 +5,12 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import InlineError from './components/Common/InlineError.vue';
+import NoData from './components/Common/NoData.vue';
 
 /* eslint-disable no-new */
 
 Vue.component('inline-error', InlineError);
+Vue.component('app-nodata', NoData);
 
 new Vue({
   el: '#app',

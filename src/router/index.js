@@ -4,6 +4,7 @@ import Home from '../components/Home/Home.vue';
 import Signup from '../components/Auth/Signup.vue';
 import Signin from '../components/Auth/Signin.vue';
 import Confirmation from '../components/Auth/Confirmation.vue';
+import ProjectDetails from '../components/Project/ProjectDetails.vue';
 
 import AuthGuard from './auth-guard';
 
@@ -32,6 +33,11 @@ export default new Router({
       name: 'Email Confirmation',
       component: Confirmation,
       props: true,
+    },
+    {
+      path: '/projects/:id',
+      name: 'Project Details',
+      component: ProjectDetails,
     },
   ],
   mode: 'history',
