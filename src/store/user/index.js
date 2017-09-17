@@ -31,6 +31,20 @@ export default {
           commit('setError', err.response.data.error.message);
         });
     },
+    confirmEmail({ commit }, payload) {
+      commit('setLoading', true);
+      commit('clearError');
+      api.user.confirm(payload)
+        .then((response) => {
+          commit('setUser', response.data.user);
+          localStorage.JWT = response.data.user.token;
+          commit('setLoading', false);
+        })
+        .catch((err) => {
+          commit('setLoading', false);
+          commit('setError', err.response.data.error);
+        });
+    },
     signin({ commit }, payload) {
       commit('setLoading', true);
       commit('clearError');

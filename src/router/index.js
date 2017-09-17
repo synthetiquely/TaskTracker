@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '../components/Home/Home.vue';
 import Signup from '../components/Auth/Signup.vue';
 import Signin from '../components/Auth/Signin.vue';
+import Confirmation from '../components/Auth/Confirmation.vue';
 
 import AuthGuard from './auth-guard';
 
@@ -25,6 +26,12 @@ export default new Router({
       path: '/user/signin',
       name: 'Signin',
       component: Signin,
+    },
+    {
+      path: '/user/confirmation/:token',
+      name: 'Email Confirmation',
+      component: Confirmation,
+      props: true,
     },
   ],
   mode: 'history',
