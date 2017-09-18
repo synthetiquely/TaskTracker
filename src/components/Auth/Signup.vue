@@ -1,7 +1,12 @@
 <template lang="html">
   <div class="ui raised very padded text container segment">
-      <h3 class="ui header">Sign up</h3>
-      <form @submit.prevent="submit" class="ui form" :class="{loading: loading, error: formError}">
+    <div class="ui attached message">
+      <div class="header">
+        Sign up
+      </div>
+      <p>Fill out the form below to sign-up for a new account</p>
+    </div>
+      <form @submit.prevent="submit" class="ui form attached fluid segment" :class="{loading: loading, error: formError}">
         <div class="field required" :class="{error: errors.name}">
           <label for="name">Name</label>
           <input
@@ -57,6 +62,10 @@
           <p>{{formError}}</p>
         </div>
       </form>
+      <div class="ui bottom attached info message">
+        <i class="icon help"></i>
+        Already signed up? <router-link to="/user/signin">Sign in here</router-link> instead.
+      </div>
   </div>
 </template>
 

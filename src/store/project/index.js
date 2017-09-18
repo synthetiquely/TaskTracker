@@ -1,3 +1,5 @@
+import api from '../../api';
+
 /* eslint-disable no-param-reassign */
 
 export default {
@@ -13,8 +15,7 @@ export default {
         tasksCompleted: 73,
         tasksTotal: 110,
         updatedAt: Date.now(),
-      },
-      {
+      }, {
         id: '2',
         title: 'Task Tracker Ruby on Rails',
         avatar: 'http://www.inovawebdesign.com/wp-content/uploads/2015/01/rails.png',
@@ -24,8 +25,7 @@ export default {
         tasksCompleted: 65,
         tasksTotal: 110,
         updatedAt: Date.now(),
-      },
-      {
+      }, {
         id: '3',
         title: 'Task Tracker VueJS',
         avatar: 'https://vuejs.org/images/logo.png',
@@ -37,6 +37,42 @@ export default {
         updatedAt: Date.now(),
       },
     ],
+  },
+  actions: {
+    createNewProject({ commit, getters }, payload) {
+      commit('setLoading', true);
+      const newProject = {
+        title: payload.title,
+        description: payload.description,
+        avatar: payload.imageUrl,
+        creator: getters.user.email,
+      };
+      api.project.createNewProject(newProject).then((response) => {
+        const {
+          _id, title, avatar, description, _creator, teamMembers, updatedAt,
+        } = response.data.project;
+        commit('createNewProject', {
+          title,
+          description,
+          avatar,
+          updatedAt,
+          id: _id,
+          creator: _creator,
+          tasksCompleted: 0,
+          tasksTotal: 0,
+          teamMembers: teamMembers.length,
+        });
+        commit('setLoading', false);
+      }).catch((err) => {
+        commit('setLoading', false);
+        commit('setError', err.response.data.error);
+      });
+    },
+  },
+  mutations: {
+    createNewProject(state, payload) {
+      state.projects.push(payload);
+    },
   },
   getters: {
     projects(state) {
