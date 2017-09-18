@@ -10,5 +10,6 @@ export default {
   },
   project: {
     createNewProject: data => axios.post(`${apiUrl}/project/new`, data),
+    loadProjects: userEmail => axios.post(`${apiUrl}/projects`, { email: userEmail }),
   },
 };

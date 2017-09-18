@@ -5,7 +5,7 @@
           <app-project-preview
             v-for="project of projects"
             :project="project"
-            :key="project.id"
+            :key="project._id"
           >
           </app-project-preview>
       </div>

@@ -4,39 +4,7 @@ import api from '../../api';
 
 export default {
   state: {
-    projects: [
-      {
-        id: '1',
-        title: 'Task Tracker Node.js',
-        avatar: 'https://avatars1.githubusercontent.com/u/9950313?v=4&s=400',
-        description: 'Task Tracker Server Side built with KoaJS',
-        creator: 'Maxim',
-        teamMembers: 11,
-        tasksCompleted: 73,
-        tasksTotal: 110,
-        updatedAt: Date.now(),
-      }, {
-        id: '2',
-        title: 'Task Tracker Ruby on Rails',
-        avatar: 'http://www.inovawebdesign.com/wp-content/uploads/2015/01/rails.png',
-        description: 'Task Tracker built with pure Ruby on Rails',
-        creator: 'Oleg',
-        teamMembers: 14,
-        tasksCompleted: 65,
-        tasksTotal: 110,
-        updatedAt: Date.now(),
-      }, {
-        id: '3',
-        title: 'Task Tracker VueJS',
-        avatar: 'https://vuejs.org/images/logo.png',
-        description: 'Task Tracker Client Side built with VueJS',
-        creator: 'Maxim',
-        teamMembers: 6,
-        tasksCompleted: 34,
-        tasksTotal: 56,
-        updatedAt: Date.now(),
-      },
-    ],
+    projects: [],
   },
   actions: {
     createNewProject({ commit, getters }, payload) {
@@ -56,8 +24,8 @@ export default {
           description,
           avatar,
           updatedAt,
-          id: _id,
-          creator: _creator,
+          _id,
+          _creator,
           tasksCompleted: 0,
           tasksTotal: 0,
           teamMembers: teamMembers.length,
@@ -68,10 +36,26 @@ export default {
         commit('setError', err.response.data.error);
       });
     },
+    // TODO: Tasks counter and team members counter and loading spinner
+    loadProjects({ commit, getters }) {
+      commit('setLoading', true);
+      api.project.loadProjects(getters.user.email)
+        .then((response) => {
+          commit('setLoading', false);
+          commit('loadProjects', response.data.projects);
+        })
+        .catch((err) => {
+          commit('setLoading', false);
+          commit('setError', err.response.data.error);
+        });
+    },
   },
   mutations: {
     createNewProject(state, payload) {
       state.projects.push(payload);
+    },
+    loadProjects(state, payload) {
+      state.projects = payload;
     },
   },
   getters: {

@@ -27,6 +27,7 @@ new Vue({
         token: localStorage.JWT,
       };
       this.$store.dispatch('autoSignin', user);
+      this.$store.dispatch('loadProjects');
     }
   },
 });
