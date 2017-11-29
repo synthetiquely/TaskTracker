@@ -82,7 +82,7 @@ export default {
         errors.email = 'Ivalid email';
       }
       if (!this.password) {
-        errors.password = 'Can\'t be empty';
+        errors.password = "Can't be empty";
       }
       return errors;
     },

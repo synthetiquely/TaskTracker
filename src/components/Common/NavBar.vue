@@ -62,6 +62,5 @@ export default {
 <style lang="css">
 nav {
   margin-bottom: 15px;
-  background-color: #008080;
 }
 </style>
