@@ -11,6 +11,7 @@
       </div>
     </div>
       <app-project-description></app-project-description>
+      <app-project-actions></app-project-actions>
       <app-project-tasks></app-project-tasks>
     </div>
 </template>
@@ -19,6 +20,7 @@
 import ProjectTeamMembers from './ProjectTeamMembers.vue';
 import ProjectStatistics from './ProjectStatistics.vue';
 import ProjectDescription from './ProjectDescription.vue';
+import ProjectActions from './ProjectActions.vue';
 import TasksGrid from '../Task/TasksGrid.vue';
 
 export default {
@@ -27,6 +29,7 @@ export default {
     'app-project-stats': ProjectStatistics,
     'app-project-description': ProjectDescription,
     'app-project-tasks': TasksGrid,
+    'app-project-actions': ProjectActions,
   },
 };
 </script>
