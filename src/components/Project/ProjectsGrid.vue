@@ -47,14 +47,14 @@ export default {
 </script>
 
 <style lang="css">
-  .cards {
-    display: flex;
-    justify-content: center;
-  }
-  .cards-pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
+.cards {
+  display: flex;
+  justify-content: center;
+}
+.cards-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 </style>
